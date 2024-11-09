@@ -71,7 +71,6 @@ export const FloatingNav = ({
           border: "1px solid rgba(255, 255, 255, 0.125)",
         }}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {navItems.map((navItem: any, idx: number) => (
           <Link
             key={`link=${idx}`}
