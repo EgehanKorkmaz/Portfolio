@@ -103,7 +103,7 @@ export const navItems = [
     //   link: "https://github.com/adrianhajdin/iphone",
     // },
   ];
-  
+  /*
   export const testimonials = [
     {
       quote:
@@ -215,3 +215,4 @@ export const navItems = [
       img: "/link.svg",
     },
   ];
+  */
