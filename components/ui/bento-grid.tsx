@@ -1,13 +1,13 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { BackgroundGradientAnimation } from "./background-gradient-animation";
-import animationData from '@/data/confetti.json';
-import Lottie from 'react-lottie';
-import MagicButton from './MagicButton';
-import { IoCopyOutline } from 'react-icons/io5';
+import animationData from "@/data/confetti.json";
+import Lottie from "react-lottie";
+import MagicButton from "./MagicButton";
+import { IoCopyOutline } from "react-icons/io5";
 //import { GlobeDemo } from "./GridGlobe";
 
 export const BentoGrid = ({
@@ -72,7 +72,7 @@ export const BentoGridItem = ({
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
-        <div className={`${id === 6 && 'flex justify-center'} h-full`}>
+        <div className={`${id === 6 && "flex justify-center"} h-full`}>
             <div className="w-full h-full absolute">
                 {img && (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -83,8 +83,7 @@ export const BentoGridItem = ({
                     />
                 )}
             </div>
-            <div className={`absolute right-0 -bottom-5 ${id === 5 &&
-            'w-full opacity-80'}`}>
+            <div className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"}`}>
                 {spareImg && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -97,10 +96,6 @@ export const BentoGridItem = ({
             <div>
                 {id === 6 && (
                     <BackgroundGradientAnimation>
-                        <div className="absolute z-50 inset-0 flex items-center 
-                        justify-center text-white font-bold px-4 
-                        pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl">
-                        </div>
                     </BackgroundGradientAnimation>
                 )}
             </div>
@@ -114,9 +109,6 @@ export const BentoGridItem = ({
                 <div className="font-sans font-bold text-lg lg:text-3xl max-w-96 z-10">
                     {title}
                 </div>
-            
-            {/* şuan çalışmıyor 8:20:30 dan öncesine tekrar bak*/}
-            {/* {id === 2 && <GlobeDemo /> } */}
 
             {id === 3 && (
                 <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
