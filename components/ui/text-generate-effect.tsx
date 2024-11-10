@@ -11,7 +11,6 @@ export const TextGenerateEffect = ({
     className?: string;
   }) => {
     const [scope, animate] = useAnimate();
-    // eslint-disable-next-line prefer-const
     let wordsArray = words.split(" ");
     useEffect(() => {
       console.log(wordsArray);
