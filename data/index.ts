@@ -77,7 +77,7 @@ export const projects = [
     des: "It works just like the original: you try to guess the hidden word within a limited number of attempts. If you get stuck or can’t think of a word, there’s a Help button that lets the computer suggest a word for you, making it easier to solve!",
     img: "/p1.svg",
     iconLists: ["/re.svg", "/ts.svg"],
-    link: "https://wordlsolver.netlify.app/",
+    href: "https://wordlsolver.netlify.app/"
   },
   {
     id: 2,
@@ -85,8 +85,8 @@ export const projects = [
     des: "I created a calorie calculator website that helps you determine your daily calorie needs. The site asks for information such as gender, height, weight, and body fat percentage to give you a personalized calorie estimate based on your unique profile.",
     img: "/p1.svg",
     iconLists: ["/re.svg", "/ts.svg"],
-    link: "https://calorie-calculator-blush.vercel.app/",
-  },
+    href: "https://calorie-calculator-blush.vercel.app/"
+  }
 //   {
 //     id: 3,
 //     title: "AI Image SaaS - Canva Application",
