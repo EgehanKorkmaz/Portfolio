@@ -60,7 +60,7 @@ const Hero = () => {
             Hi! I&apos;m Egehan, a React.js and next.js Developer based in Turkey.
           </p>
 
-          <a href="#about">
+          <a href="#projects">
             <MagicButton
               title="Show my work"
               icon={<FaLocationArrow />}

@@ -74,15 +74,15 @@ export const projects = [
   {
     id: 1,
     title: "Wordle Solver",
-    des: "It works just like the original: you try to guess the hidden word within a limited number of attempts. If you get stuck or can’t think of a word, there’s a Help button that lets the computer suggest a word for you, making it easier to solve!",
-    img: "/p1.svg",
+    des: "Guess the hidden word in limited tries! Use Help for smart hints anytime.",
+    img: "/Wordle.png",
     iconLists: ["/re.svg", "/ts.svg"],
     href: "https://wordlsolver.netlify.app/"
   },
   {
     id: 2,
     title: "Calorie Calculator",
-    des: "I created a calorie calculator website that helps you determine your daily calorie needs. The site asks for information such as gender, height, weight, and body fat percentage to give you a personalized calorie estimate based on your unique profile.",
+    des: "Track your daily calorie needs! Enter your height, weight, and body fat for a personalized estimate.",
     img: "/p1.svg",
     iconLists: ["/re.svg", "/ts.svg"],
     href: "https://calorie-calculator-blush.vercel.app/"
@@ -108,32 +108,25 @@ export const projects = [
 export const workExperience = [
   {
     id: 1,
-    title: "IT Intern",
-    desc: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.",
+    title: "Klemsan Elektrik Elektronik | IT",
+    desc: "I actively took part in the management and development of IT infrastructure. By providing user support services, I delivered fast and effective solutions to the technological needs of employees. I monitored system performance and collaborated within the team to improve the efficiency of project processes.",
     className: "md:col-span-2",
     thumbnail: "/exp1.svg",
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
+    title: "Sade Labs | Computer Programmer",
+    desc: "Optimization with the sensors provided for the automotive factory and the software of these sensors working in the field. Working in the field of graphic design.",
     className: "md:col-span-2", // change to md:col-span-2
     thumbnail: "/exp2.svg",
   },
   {
     id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
+    title: "RMA Elektrik Elektronik | Voluntary Internship",
+    desc: "• Notebook, LCD, TV, monitor, tablet, PC, projector, maintenance and repair of industrial automation devices. Creating a transaction record",
     className: "md:col-span-2", // change to md:col-span-2
     thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
-    className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
-  },
+  }
 ];
 
 export const socialMedia = [
