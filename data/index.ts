@@ -83,7 +83,7 @@ export const projects = [
     id: 2,
     title: "Calorie Calculator",
     des: "Track your daily calorie needs! Enter your height, weight, and body fat for a personalized estimate.",
-    img: "/p1.svg",
+    img: "/Calori.png",
     iconLists: ["/re.svg", "/ts.svg"],
     href: "https://calorie-calculator-blush.vercel.app/"
   }
