@@ -25,6 +25,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/exp1.svg" sizes="any" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Egehan Korkmaz",
+              "url": "https://egehankorkmaz.vercel.app",
+              "jobTitle": "Computer Engineering Student & Software Developer",
+              "sameAs": [
+                "https://github.com/YOUR_GITHUB_USERNAME",
+                "https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME/"
+              ]
+            }),
+          }}
+        />
       </head>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-PPY1J0MG1W"
