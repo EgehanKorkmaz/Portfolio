@@ -1,17 +1,17 @@
-# 1. Aşama: Derleme (Build)
-FROM node:20-slim AS builder
+# 1. Aşama: Build (Daha hafif olan Alpine sürümünü kullanalım)
+FROM node:20-alpine AS builder
 WORKDIR /app
-# Bağımlılıkları kopyala ve yükle
+
+# Paket yükleme sırasında gereksiz logları ve kontrolleri kapatalım
 COPY package*.json ./
-RUN npm ci
-# Kaynak kodları kopyala ve derle
+RUN npm ci --quiet --no-audit --prefer-offline
+
 COPY . .
 RUN npm run build
 
-# 2. Aşama: Sunum (Serve)
+# 2. Aşama: Serve (Nginx Alpine)
 FROM nginx:alpine
-# Eğer projen Vite kullanıyorsa 'dist', eski React (CRA) ise 'build' yazmalısın.
-# Portfolyo klasör yapına göre aşağıdakini kontrol et:
+# Vite kullanıyorsan 'dist', React ise 'build' olduğundan emin ol
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
