@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google"; // 1. Yeni kütüphane eklendi
 
 import "./globals.css";
 import { ThemeProvider } from "./provider";
@@ -22,6 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Eğer içeriğin Türkçe ise lang="tr" yapman SEO için daha iyidir.
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/exp1.svg" sizes="any" />
@@ -32,29 +33,17 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Egehan Korkmaz",
-              "url": "https://egehankorkmaz.vercel.app",
+              // KRİTİK: Eski Vercel linkini yeni .me domaininle güncelledim
+              "url": "https://egehankorkmaz.me", 
               "jobTitle": "Computer Engineering Student & Software Developer",
               "sameAs": [
-                "https://github.com/YOUR_GITHUB_USERNAME",
-                "https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME/"
+                "https://github.com/EgehanKorkmaz", // Buraya gerçek GitHub kullanıcı adını yazmalısın
+                "https://www.linkedin.com/in/egehankorkmaz/" // Buraya gerçek LinkedIn kullanıcı adını yazmalısın
               ]
             }),
           }}
         />
       </head>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-PPY1J0MG1W"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-PPY1J0MG1W');
-        `}
-      </Script>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -64,6 +53,9 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        
+        {/* 2. Manuel Script etiketlerini sildim, bu tek satır hepsinin yerini tutuyor ve daha hızlı çalışıyor */}
+        <GoogleAnalytics gaId="G-PPY1J0MG1W" />
       </body>
     </html>
   );
