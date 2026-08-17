@@ -73,6 +73,22 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
+    title: "Hasan Korkmaz Gayrimenkul",
+    des: "Profesyonel gayrimenkul ve yatırım danışmanlığı, satılık ve kiralık ilan hizmetleri sunan web uygulaması.",
+    img: "/hasankorkmaz_re.png",
+    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/maps.png", "/leaflet.png"], 
+    href: "https://hasankorkmaz-re.vercel.app/"
+  },
+  {
+    id: 2,
+    title: "Özge & İbrahim Mete Düğün Anı Havuzu",
+    des: "Düğün anılarını ölümsüzleştirmek için misafirlerin fotoğraf ve video paylaşabileceği Next.js tabanlı platform.",
+    img: "/Özge-İbrahim-Mete-Düğün-Anı-Havuzu.png",
+    iconLists: ["/next.svg", "/re.svg", "/tail.svg", "/ts.svg", "/drive.png"],
+    href: "https://mete-ozge-dugun.vercel.app/"
+  },
+  {
+    id: 3,
     title: "Wordle Solver",
     des: "Guess the hidden word in limited tries! Use Help for smart hints anytime.",
     img: "/Wordle.png",
@@ -80,7 +96,7 @@ export const projects = [
     href: "https://wordlsolver.netlify.app/"
   },
   {
-    id: 2,
+    id: 4,
     title: "Calorie Calculator",
     des: "Track your daily calorie needs! Enter your height, weight, and body fat for a personalized estimate.",
     img: "/Calori.png",
