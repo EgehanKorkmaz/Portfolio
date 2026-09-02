@@ -1,12 +1,5 @@
 # Modern & Interactive Personal Portfolio
 
-> **Note:** Don't forget to add a screenshot of your project to the `public` folder (e.g., `preview.png`) and uncomment the image link below to show a preview in your README!
-<!-- ![Portfolio Preview](./public/preview.png) -->
-
-Architected and developed a high-performance, interactive personal portfolio website to showcase my software development projects and skills. Leveraged Next.js and TypeScript for robust architecture, alongside Tailwind CSS for a fully responsive design. Integrated advanced animations and 3D web elements using Framer Motion and Three.js to create an engaging user experience. Deployed on Vercel with Sentry integrated for real-time error tracking.
-
-### 🌐 Live Demo: [Add your live URL here, e.g., https://your-portfolio.vercel.app]
-
 ## ✨ Core Features
 - **Interactive 3D Elements & Animations**
 - **Next.js Architecture**
