@@ -73,14 +73,22 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title: "Hasan Korkmaz Gayrimenkul",
-    des: "Profesyonel gayrimenkul ve yatırım danışmanlığı, satılık ve kiralık ilan hizmetleri sunan web uygulaması.",
-    img: "/hasankorkmaz_re.png",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/maps.png", "/leaflet.png"], 
-    href: "https://hasankorkmaz-re.vercel.app/"
+    title: "Kafe POS & Hassas Terazi Sistemi",
+    des: "RS232/USB hassas terazi entegrasyonlu (Web Serial API), gerçek zamanlı masa/sipariş senkronizasyonuna ve 3 katmanlı kriptografik güvenlik mimarisine sahip tam kapsamlı bulut POS & Adisyon sistemi.",
+    img: "/kafe_pos.png",
+    iconLists: ["/next.svg", "/re.svg", "/ts.svg", "/tail.svg", "/prisma.svg", "/postgres.svg"],
+    href: "https://kafe-pos-alpha.vercel.app/"
   },
   {
     id: 2,
+    title: "Hasan Korkmaz Gayrimenkul",
+    des: "Profesyonel gayrimenkul ve yatırım danışmanlığı, satılık ve kiralık ilan hizmetleri sunan web uygulaması.",
+    img: "/hasankorkmaz_re.png",
+    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/maps.png", "/leaflet.png"],
+    href: "https://hasankorkmaz-re.vercel.app/"
+  },
+  {
+    id: 3,
     title: "Özge & İbrahim Mete Düğün Anı Havuzu",
     des: "Düğün anılarını ölümsüzleştirmek için misafirlerin fotoğraf ve video paylaşabileceği Next.js tabanlı platform.",
     img: "/Özge-İbrahim-Mete-Düğün-Anı-Havuzu.png",
@@ -88,37 +96,37 @@ export const projects = [
     href: "https://mete-ozge-dugun.vercel.app/"
   },
   {
-    id: 3,
+    id: 4,
     title: "Wordle Solver",
     des: "Guess the hidden word in limited tries! Use Help for smart hints anytime.",
     img: "/Wordle.png",
     iconLists: ["/re.svg", "/ts.svg"],
     href: "https://wordlsolver.netlify.app/"
   },
-  {
-    id: 4,
-    title: "Calorie Calculator",
-    des: "Track your daily calorie needs! Enter your height, weight, and body fat for a personalized estimate.",
-    img: "/Calori.png",
-    iconLists: ["/re.svg", "/ts.svg"],
-    href: "https://calorie-calculator-blush.vercel.app/"
-  }
-//   {
-//     id: 3,
-//     title: "AI Image SaaS - Canva Application",
-//     des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-//     img: "/p3.svg",
-//     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-//     link: "/ui.aiimg.com",
-//   },
-//   {
-//     id: 4,
-//     title: "Animated Apple Iphone 3D Website",
-//     des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-//     img: "/p4.svg",
-//     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-//     link: "/ui.apple.com",
-//   },
+  // {
+  //   id: 5,
+  //   title: "Calorie Calculator",
+  //   des: "Track your daily calorie needs! Enter your height, weight, and body fat for a personalized estimate.",
+  //   img: "/Calori.png",
+  //   iconLists: ["/re.svg", "/ts.svg"],
+  //   href: "https://calorie-calculator-blush.vercel.app/"
+  // }
+  //   {
+  //     id: 6,
+  //     title: "AI Image SaaS - Canva Application",
+  //     des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
+  //     img: "/p3.svg",
+  //     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
+  //     link: "/ui.aiimg.com",
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Animated Apple Iphone 3D Website",
+  //     des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
+  //     img: "/p4.svg",
+  //     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
+  //     link: "/ui.apple.com",
+  //   },
 ];
 
 export const workExperience = [
