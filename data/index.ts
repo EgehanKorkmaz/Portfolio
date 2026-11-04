@@ -76,7 +76,7 @@ export const projects = [
     title: "Kafe POS & Hassas Terazi Sistemi",
     des: "RS232/USB hassas terazi entegrasyonlu (Web Serial API), gerçek zamanlı masa/sipariş senkronizasyonuna ve 3 katmanlı kriptografik güvenlik mimarisine sahip tam kapsamlı bulut POS & Adisyon sistemi.",
     img: "/kafe_pos.png",
-    iconLists: ["/next.svg", "/re.svg", "/ts.svg", "/tail.svg", "/prisma.svg", "/postgres.svg"],
+    iconLists: ["/next.svg", "/re.svg", "/ts.svg", "/tail.svg", "/prisma.png", "/neon.png"],
     href: "https://kafe-pos-alpha.vercel.app/"
   },
   {
