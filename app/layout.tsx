@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google"; // 1. Yeni kütüphane eklendi
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 import { ThemeProvider } from "./provider";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Egehan Korkmaz | Kişisel Portfolyo & Yazılım Projeleri",
+  title: "Egehan Korkmaz | Front-End & Full-Stack Developer",
   description:
-    "Egehan Korkmaz'ın kişisel web sitesi. Yazılım projeleri, blog yazıları ve iletişim bilgileri.",
+    "Portfolio of Egehan Korkmaz, Computer Engineer and Full-Stack Developer specializing in React.js, Next.js, and TypeScript.",
   other: {
     "google-site-verification": "Zck4Vy6_J6qHsJeGIpv1Zn5-VBuYhxygai-1bMMmzis",
   },
@@ -22,7 +23,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Eğer içeriğin Türkçe ise lang="tr" yapman SEO için daha iyidir.
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/exp1.svg" sizes="any" />
@@ -32,14 +32,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              "name": "Egehan Korkmaz",
-              // KRİTİK: Eski Vercel linkini yeni .me domaininle güncelledim
-              "url": "https://egehankorkmaz.me", 
-              "jobTitle": "Computer Engineering Student & Software Developer",
-              "sameAs": [
-                "https://github.com/EgehanKorkmaz", // Buraya gerçek GitHub kullanıcı adını yazmalısın
-                "https://www.linkedin.com/in/egehankorkmaz/" // Buraya gerçek LinkedIn kullanıcı adını yazmalısın
-              ]
+              name: "Egehan Korkmaz",
+              url: "https://egehankorkmaz.me",
+              jobTitle: "Front-End & Full-Stack Software Developer",
+              sameAs: [
+                "https://github.com/EgehanKorkmaz",
+                "https://www.linkedin.com/in/egehan-korkmaz/",
+              ],
             }),
           }}
         />
@@ -51,10 +50,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
-        
-        {/* 2. Manuel Script etiketlerini sildim, bu tek satır hepsinin yerini tutuyor ve daha hızlı çalışıyor */}
+
         <GoogleAnalytics gaId="G-PPY1J0MG1W" />
       </body>
     </html>

@@ -66,7 +66,6 @@ export const PinPerspective = ({
   title?: string;
   href?: string;
 }) => {
-    console.log(href);
   return (
     // change w-96 to w-full
     <motion.div className="pointer-events-auto w-full h-80 flex items-center justify-center opacity-0 group-hover/pin:opacity-100 z-[60] transition duration-500">
