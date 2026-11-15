@@ -1,45 +1,47 @@
-import React from "react";
+"use client";
 
-import { workExperience } from "@/data";
+import React from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "./ui/MovingBorders";
 
 const Experience = () => {
+  const { t } = useLanguage();
+
   return (
-    <div className="py-20 w-full">
-      <h1 className="heading">
-        My <span className="text-purple">work experience</span>
-      </h1>
+    <section className="py-20 w-full">
+      <h2 className="heading">
+        {t.experienceSection.headingPart1}{" "}
+        <span className="text-purple">
+          {t.experienceSection.headingHighlight}
+        </span>
+      </h2>
 
       <div className="w-full mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10">
-        {workExperience.map((card) => (
+        {t.experienceSection.items.map((card) => (
           <Button
             key={card.id}
-            //   random duration will be fun , I think , may be not
-            duration={Math.floor(Math.random() * 10000) + 10000}
+            as="div"
+            duration={12000 + card.id * 2500}
             borderRadius="1.75rem"
             style={{
-              //   add these two
-              //   you can generate the color from here https://cssgradient.io/
               background: "rgb(4,7,29)",
               backgroundColor:
                 "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-              // add this border radius to make it more rounded so that the moving border is more realistic
-              borderRadius: `calc(1.75rem* 0.96)`,
+              borderRadius: `calc(1.75rem * 0.96)`,
             }}
-            // remove bg-white dark:bg-slate-900
             className="flex-1 text-black dark:text-white border-neutral-200 dark:border-slate-800"
           >
-            <div className="flex lg:flex-row flex-col lg:items-center p-3 py-6 md:p-5 lg:p-10 gap-2">
+            <div className="flex lg:flex-row flex-col lg:items-center p-3 py-6 md:p-5 lg:p-10 gap-2 w-full">
               <img
                 src={card.thumbnail}
-                alt={card.thumbnail}
+                alt={card.title}
                 className="lg:w-32 md:w-20 w-16"
               />
               <div className="lg:ms-5">
-                <h1 className="text-start text-xl md:text-2xl font-bold">
+                <h3 className="text-start text-xl md:text-2xl font-bold">
                   {card.title}
-                </h1>
-                <p className="text-start text-white-100 mt-3 font-semibold">
+                </h3>
+                <p className="text-start text-white-100 mt-3 font-semibold leading-relaxed">
                   {card.desc}
                 </p>
               </div>
@@ -47,7 +49,7 @@ const Experience = () => {
           </Button>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

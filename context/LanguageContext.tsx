@@ -20,21 +20,15 @@ export const LanguageProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
+    // Her zaman varsayılan olarak İngilizce ("en") başlar
     const [lang, setLangState] = useState<Language>("en");
 
     useEffect(() => {
-        const savedLang = localStorage.getItem("portfolio_lang") as Language | null;
-        if (savedLang && ["en", "tr", "de"].includes(savedLang)) {
-            setLangState(savedLang);
-            document.documentElement.lang = savedLang;
-        } else {
-            document.documentElement.lang = "en";
-        }
-    }, []);
+        document.documentElement.lang = lang;
+    }, [lang]);
 
     const setLang = (newLang: Language) => {
         setLangState(newLang);
-        localStorage.setItem("portfolio_lang", newLang);
         document.documentElement.lang = newLang;
     };
 
