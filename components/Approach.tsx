@@ -24,7 +24,7 @@ const Approach = () => {
           des={phases[0].des}
         >
           <CanvasRevealEffect
-            animationSpeed={5.1}
+            animationSpeed={5}
             containerClassName="bg-emerald-900 rounded-3xl overflow-hidden"
           />
         </Card>
@@ -34,7 +34,7 @@ const Approach = () => {
           des={phases[1].des}
         >
           <CanvasRevealEffect
-            animationSpeed={3}
+            animationSpeed={5}
             containerClassName="bg-pink-900 rounded-3xl overflow-hidden"
             colors={[
               [255, 166, 158],
@@ -49,7 +49,7 @@ const Approach = () => {
           des={phases[2].des}
         >
           <CanvasRevealEffect
-            animationSpeed={3}
+            animationSpeed={5}
             containerClassName="bg-sky-600 rounded-3xl overflow-hidden"
             colors={[[125, 211, 252]]}
           />
