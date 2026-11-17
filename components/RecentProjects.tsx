@@ -8,41 +8,44 @@ import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
   const { t } = useLanguage();
-  // Kesintisiz (seamless) sonsuz döngü için listeyi iki kez birleştiriyoruz
   const marqueeProjects = [...t.projects, ...t.projects];
 
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const posRef = useRef<number>(0);
+  const startXRef = useRef<number>(0);
+  const startPosRef = useRef<number>(0);
+  const initializedRef = useRef<boolean>(false);
+
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
 
-  // Otomatik kayma hızı (Piksel / Kare). Hızı artırmak için 1.2, yavaşlatmak için 0.5 yapabilirsin.
-  // Yön: Soldan sağa akış için negatif (-0.8), sağdan sola akış için pozitif (0.8) kullanabilirsin.
-  const SPEED = -0.8;
+  // Otomatik kayma hızı (Soldan sağa akış için pozitif: 0.8, sağdan sola için negatif: -0.8)
+  const SPEED = 0.8;
+
+  const wrapPosition = (pos: number, halfWidth: number) => {
+    if (halfWidth <= 0) return pos;
+    let wrapped = pos % halfWidth;
+    if (wrapped > 0) wrapped -= halfWidth;
+    return wrapped;
+  };
 
   useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    // Soldan sağa akışta başlangıçta sınırda kalmamak için ortadan başlatıyoruz
-    if (slider.scrollLeft === 0 && SPEED < 0) {
-      slider.scrollLeft = slider.scrollWidth / 2;
-    }
-
     let animationFrameId: number;
 
     const animate = () => {
-      if (!isHovered && !isDragging && slider) {
-        slider.scrollLeft += SPEED;
+      const track = trackRef.current;
+      if (track) {
+        const halfWidth = track.scrollWidth / 2;
 
-        const halfWidth = slider.scrollWidth / 2;
-        // Sonsuz döngü sınır kontrolü (kullanıcı hissetmeden başa/ortaya sarar)
-        if (slider.scrollLeft >= halfWidth) {
-          slider.scrollLeft -= halfWidth;
-        } else if (slider.scrollLeft <= 0) {
-          slider.scrollLeft += halfWidth;
+        if (!initializedRef.current && halfWidth > 0) {
+          posRef.current = -halfWidth / 2;
+          initializedRef.current = true;
+        }
+
+        if (!isHovered && !isDragging && halfWidth > 0) {
+          posRef.current = wrapPosition(posRef.current + SPEED, halfWidth);
+          track.style.transform = `translate3d(${posRef.current}px, 0, 0)`;
         }
       }
       animationFrameId = requestAnimationFrame(animate);
@@ -52,55 +55,35 @@ const RecentProjects = () => {
     return () => cancelAnimationFrame(animationFrameId);
   }, [isHovered, isDragging, SPEED]);
 
-  // Sonsuz döngünün manuel sürükleme sırasında da kopmamasını sağlar
-  const normalizeInfiniteScroll = (slider: HTMLDivElement) => {
-    const halfWidth = slider.scrollWidth / 2;
-    if (slider.scrollLeft >= halfWidth) {
-      slider.scrollLeft -= halfWidth;
-      setScrollLeftState(slider.scrollLeft);
-      setStartX((prev) => prev);
-    } else if (slider.scrollLeft <= 0) {
-      slider.scrollLeft += halfWidth;
-      setScrollLeftState(slider.scrollLeft);
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!sliderRef.current) return;
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Sadece sol tık veya dokunmatik ekranda çalışsın
+    if (e.pointerType === "mouse" && e.button !== 0) return;
     setIsDragging(true);
     setHasDragged(false);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeftState(sliderRef.current.scrollLeft);
+    startXRef.current = e.clientX;
+    startPosRef.current = posRef.current;
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !sliderRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Sürükleme hassasiyeti çarpanı
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging || !trackRef.current) return;
+    const dx = e.clientX - startXRef.current;
 
-    // 5px'ten fazla hareket edildiyse bunun bir tıklama değil sürükleme olduğunu işaretle
-    if (Math.abs(walk) > 5) {
+    if (Math.abs(dx) > 6) {
       setHasDragged(true);
     }
 
-    sliderRef.current.scrollLeft = scrollLeftState - walk;
-    normalizeInfiniteScroll(sliderRef.current);
+    const halfWidth = trackRef.current.scrollWidth / 2;
+    posRef.current = wrapPosition(startPosRef.current + dx * 1.2, halfWidth);
+    trackRef.current.style.transform = `translate3d(${posRef.current}px, 0, 0)`;
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = () => {
     setIsDragging(false);
-    setTimeout(() => setHasDragged(false), 50);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-    setIsHovered(false);
     setTimeout(() => setHasDragged(false), 50);
   };
 
   return (
-    <section className="py-20 w-full overflow-hidden" id="projects">
+    <section className="py-20 w-full" id="projects">
       <h2 className="heading">
         {t.projectsSection.headingPart1}{" "}
         <span className="text-purple">
@@ -108,24 +91,25 @@ const RecentProjects = () => {
         </span>
       </h2>
 
-      {/* Sürüklenebilir & Otomatik Kayan Şerit Kapsayıcısı */}
+      {/* Overflow-y oluşturmayan, tekerlekle sayfa kaydırmayı engellemeyen kapsayıcı */}
       <div
-        ref={sliderRef}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onTouchStart={() => setIsHovered(true)}
-        onTouchEnd={() => setIsHovered(false)}
-        className={`relative w-full mt-10 overflow-x-scroll no-scrollbar select-none [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)] ${isDragging ? "cursor-grabbing" : "cursor-grab"
-          }`}
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
+        onMouseLeave={() => {
+          setIsHovered(false);
+          handlePointerUp();
         }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        style={{ touchAction: "pan-y" }}
+        className={`relative w-full mt-10 select-none [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)] ${isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
       >
-        <div className="flex w-max gap-12 py-10 px-4">
+        <div
+          ref={trackRef}
+          className="flex w-max gap-12 py-10 px-4 will-change-transform"
+        >
           {marqueeProjects.map((item, idx) => (
             <div
               className={`lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw] shrink-0 ${hasDragged ? "pointer-events-none" : ""

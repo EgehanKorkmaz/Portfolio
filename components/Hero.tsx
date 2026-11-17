@@ -42,6 +42,7 @@ const Hero = () => {
           <TextGenerateEffect
             key={t.hero.title}
             words={t.hero.title}
+            highlightWords={t.hero.highlightWords}
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
           />
 
