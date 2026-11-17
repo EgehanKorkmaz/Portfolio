@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
 
@@ -17,7 +17,7 @@ const Approach = () => {
           {t.approachSection.headingHighlight}
         </span>
       </h2>
-      <div className="my-20 flex flex-col lg:flex-row items-center justify-center w-full gap-4">
+      <div className="my-12 lg:my-20 flex flex-col lg:flex-row items-center justify-center w-full gap-8 lg:gap-4">
         <Card
           title={phases[0].title}
           icon={<AceternityIcon order={phases[0].order} />}
@@ -72,14 +72,34 @@ const Card = ({
   children?: React.ReactNode;
   des: string;
 }) => {
-  const [hovered, setHovered] = React.useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Ekranın dikey olarak tam merkez bandına (-38% üstten, -38% alttan) girdiğinde tetiklenir.
+  // Böylece mobilde aynı anda sadece ekranın ortasındaki Phase kartı açılır.
+  const isInView = useInView(cardRef, {
+    margin: "-38% 0px -38% 0px",
+  });
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const isActive = isMobile ? isInView : hovered;
+
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={() => setHovered((prev) => !prev)}
+      ref={cardRef}
+      onMouseEnter={() => !isMobile && setHovered(true)}
+      onMouseLeave={() => !isMobile && setHovered(false)}
       className="border border-black/[0.2] group/canvas-card flex items-center justify-center
-       dark:border-white/[0.2] max-w-sm w-full mx-auto p-4 relative h-[28rem] lg:h-[35rem] rounded-3xl cursor-pointer"
+       dark:border-white/[0.2] max-w-sm w-full mx-auto p-4 relative h-[24rem] lg:h-[35rem] rounded-3xl transition-all duration-300"
       style={{
         background: "rgb(4,7,29)",
         backgroundColor:
@@ -92,11 +112,13 @@ const Card = ({
       <Icon className="absolute h-10 w-10 -bottom-3 -right-3 dark:text-white text-black opacity-30" />
 
       <AnimatePresence>
-        {hovered && (
+        {isActive && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="h-full w-full absolute inset-0"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="h-full w-full absolute inset-0 rounded-3xl overflow-hidden"
           >
             {children}
           </motion.div>
@@ -106,19 +128,21 @@ const Card = ({
       <div className="relative z-20 px-6 lg:px-10">
         <div
           className={`text-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] 
-          transition duration-200 min-w-40 mx-auto flex items-center justify-center ${hovered ? "opacity-0 -translate-y-4" : "opacity-100"
+          transition duration-300 min-w-40 mx-auto flex items-center justify-center ${isActive
+              ? "opacity-0 -translate-y-4 pointer-events-none"
+              : "opacity-100"
             }`}
         >
           {icon}
         </div>
         <h3
-          className={`dark:text-white text-center text-2xl lg:text-3xl relative z-10 text-black mt-4 font-bold transition duration-200 ${hovered ? "opacity-100 text-white -translate-y-2" : "opacity-0"
+          className={`dark:text-white text-center text-2xl lg:text-3xl relative z-10 text-black mt-4 font-bold transition duration-300 ${isActive ? "opacity-100 text-white -translate-y-2" : "opacity-0"
             }`}
         >
           {title}
         </h3>
         <p
-          className={`text-sm relative z-10 mt-4 text-center transition duration-200 ${hovered ? "opacity-100 text-white -translate-y-2" : "opacity-0"
+          className={`text-sm relative z-10 mt-4 text-center transition duration-300 ${isActive ? "opacity-100 text-white -translate-y-2" : "opacity-0"
             }`}
           style={{ color: "#E4ECFF" }}
         >

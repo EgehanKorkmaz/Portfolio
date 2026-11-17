@@ -133,7 +133,7 @@ const RecentProjects = () => {
               key={`${item.id}-${idx}`}
             >
               <PinContainer title={t.projectsSection.visit} href={item.href}>
-                <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[28vh] mb-6 rounded-2xl">
+                <div className="relative flex items-center justify-center sm:w-96 w-[75vw] overflow-hidden h-[20vh] lg:h-[28vh] mb-6 rounded-2xl">
                   <div
                     className="relative w-full h-full overflow-hidden lg:rounded-2xl"
                     style={{ backgroundColor: "#13162D" }}
